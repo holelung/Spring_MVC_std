@@ -4,11 +4,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>bye</title>
+<title>메인이다!</title>
 </head>
 <body>
 
+	<jsp:include page="include/header.jsp" />
+	
+	
+	
+	
+	<div style="height:500px"></div>
+	
+	
+	
+	
+	
+	<jsp:include page="include/footer.jsp"/>
 
-	<jsp:forward page="WEB-INF/views/main_page.jsp"></jsp:forward>
+
+
 </body>
 </html>

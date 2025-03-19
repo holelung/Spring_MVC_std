@@ -5,4 +5,34 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
+	<!--
+		* root-context.xml
+		서버 구동과 동시에 web.xml파일을 거쳐서 로딩되는 문서 == preloading
+		=> 서버가 구동되면서 세팅되어야하는(Bean등록) 내용들을 작성 (DB접속, 트랜젝션처리, 외부모듈연결 등등...)
+	 -->
+	 
+	 <bean class="org.apache.commons.dbcp.BasicDataSource"
+	 	   id="dataSource"
+	 	   destroy-method="close">
+	 	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+	 	<property name="url" value="${Oracle.url}"></property>
+	 	<property name="username" value="${Oracle.username}"/>
+		<property name="password" value="${Oracle.password}"/>
+	 </bean>
+	 
+	 <bean class = "org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
+	 	<property name="configLocation" value="classpath:mybatis-config.xml"/>
+	 	<property name="dataSource" ref="dataSource"/>
+	 </bean>
+	 
+	 <bean class = "org.mybatis.spring.SqlSessionTemplate" id="sqlSessionTemplate" >
+	 	<constructor-arg ref="sqlSessionFactory"/>
+	 </bean>
+	 <!--
+	 	SqlSession sqlSession = new SqlSessionTemplate(sqlSessionFactory); 
+	  -->
+	 
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations" value="classpath:/url.properties"/>
+	</bean>
 </beans>
