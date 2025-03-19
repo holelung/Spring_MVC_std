@@ -33,5 +33,5 @@ tmp/
 
 
 # 세팅KEY
-.properties
+*.properties
 lib/
