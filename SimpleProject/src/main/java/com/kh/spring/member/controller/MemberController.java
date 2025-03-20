@@ -186,6 +186,7 @@ public class MemberController {
 		// 예외 발생 => 예외처리기로 위임
 		
 		return "redirect:my-page";
+		
 	}
 	
 	
