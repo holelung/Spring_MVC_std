@@ -1,4 +1,4 @@
-package com.kh.spring.exception.controller;
+package com.kh.spring.exception;
 
 public class InvalidParameterException extends RuntimeException {
 

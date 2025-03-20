@@ -1,6 +1,8 @@
 package com.kh.spring.member.controller;
 
 
+import java.sql.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -159,6 +161,38 @@ public class MemberController {
 		return "main_page";	
 	}
 	
+	@GetMapping("my-page")
+	public String myPage() {
+		return "member/my_page";
+	}
+	
+	@PostMapping("update-member")
+	public String update(MemberDTO member, HttpSession session) {
+		// 1. Controller에서는 RequestMapping 애노테이션 및 요청 시 전달값이 잘 전달되는지 확인
+		// log.info("사용자가 입력한 값 : {}", member);
+			
+		// 2. 이번에 실행할 SQL문을 생각
+		// UPDATE ==> KH_MEMBER(MEMBER_ID)
+		// SessionScpe에 loginMember 의 memberId값을 넘겨주어야 겠다.
+		memberService.update(member, session);
+//		log.info("updateMember 값 : {}" , updateMember);
+		
+		// 수행에 성공했을 경우 =>
+		// my_page.jsp로 이동 + 갱신된 회원의 정보 출력
+		// Id를 가지고 다시 조회
+		
+		// 수행에 실패했을 경우 =>
+		// messag를 담아서 error_page로 포워딩
+		// 예외 발생 => 예외처리기로 위임
+		
+		return "redirect:my-page";
+	}
+	
+	
+	// 탈퇴구현하기
+	// 비밀번호를 받는다.
+	// 비밀번호가 맞는지 검증 => 예외
+	// DELETE 성공햇는지 검증 => 예외
 	
 	
 	

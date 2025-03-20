@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.exception.TooLargeValueException;
+import com.kh.spring.exception.AuthenticationException;
+import com.kh.spring.exception.DuplicateIdException;
 import com.kh.spring.exception.InvalidParameterException;
 import com.kh.spring.exception.MemberNotFoundException;
 import com.kh.spring.exception.PasswordNotMatchException;
@@ -23,6 +25,16 @@ public class ExceptionHandlingController {
 		  .setViewName("include/error_page");
 		log.info("발생 예외 : {}", errorMsg, e);
 		return mv;
+	}
+	
+	@ExceptionHandler(AuthenticationException.class)
+	protected ModelAndView authenticationException(AuthenticationException e) {
+		return createErrorResponse(e.getMessage(), e);
+	}
+	
+	@ExceptionHandler(DuplicateIdException.class)
+	protected ModelAndView duplicateIdException(DuplicateIdException e) {
+		return createErrorResponse(e.getMessage(), e);
 	}
 	
 	@ExceptionHandler(TooLargeValueException.class)
@@ -42,6 +54,11 @@ public class ExceptionHandlingController {
 	
 	@ExceptionHandler(PasswordNotMatchException.class)
 	protected ModelAndView passwordNotMatchError(PasswordNotMatchException e) {
+		return createErrorResponse(e.getMessage(), e);
+	}
+	
+	@ExceptionHandler(NullPointerException.class)
+	protected ModelAndView nullPointerError(NullPointerException e) {
 		return createErrorResponse(e.getMessage(), e);
 	}
 	
