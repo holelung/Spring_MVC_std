@@ -21,7 +21,7 @@ public interface MemberService { // 계약서
 	
 
 	// 회원 탈퇴
-	int delete(MemberDTO member);
+	void delete(MemberDTO member, HttpSession session);
 
 	// 1절끝
 	

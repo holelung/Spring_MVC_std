@@ -58,6 +58,13 @@
     </style>
 </head>
 <body>
+	<c:if test="${ not empty sessionScope.message }">
+		<script>
+			alert("${sessionScope.message}");
+		</script>
+		 <c:remove var="message" scope="session"/>
+	</c:if>
+	
 
     <div id="header">
         <div id="header_1">

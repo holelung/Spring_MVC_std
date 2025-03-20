@@ -194,7 +194,12 @@ public class MemberController {
 	// 비밀번호를 받는다.
 	// 비밀번호가 맞는지 검증 => 예외
 	// DELETE 성공햇는지 검증 => 예외
-	
+	@PostMapping("delete")
+	public String delete(MemberDTO member, HttpSession session) {
+		
+		memberService.delete(member, session);
+		return "redirect:/";
+	}
 	
 	
 	

@@ -77,7 +77,7 @@
                         </div>
                         <br>
                             <label for="userPwd" class="mr-sm-2">Password : </label>
-                            <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Enter Password" id="userPwd" name=""> <br>
+                            <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Enter Password" id="userPwd" name="memberPw"> <br>
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer" align="center">
