@@ -32,7 +32,7 @@
 	 </bean>
 	 
 	 <!-- 마이바티스 스프링이 스캔때려! -->
-	 <mybatis-spring:scan base-package="com.kh.spring.member.model.dao"/>
+	 <mybatis-spring:scan base-package="com.kh.spring.member.model.dao, com.kh.spring.board.model.mapper"/>
 	 <!--
 	 	SqlSession sqlSession = new SqlSessionTemplate(sqlSessionFactory); 
 	  -->
