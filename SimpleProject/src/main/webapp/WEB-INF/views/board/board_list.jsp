@@ -99,16 +99,22 @@
 
             <div id="pagingArea">
                 <ul class="pagination">
-                    
-                    <li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
-                    
+                    <c:if test="${ map.pageInfo.currentPage > 1 }">
+			        	<button 
+			       		class="btn btn-outline-primary" style="color:#52b1ff;"
+			       		onclick="location.href='boards?page=${ map.pageInfo.currentPage - 1 }'">이전</button>
+		        	</c:if>
+        
 					<c:forEach begin="${ map.pageInfo.startPage }" end="${ map.pageInfo.endPage }" var="num">
 	                    <li class="page-item">
 	                    	<a class="page-link" href="boards?page=${ num }">${ num }</a>
 	                    </li>
 					</c:forEach>                    
-                   
-                    <li class="page-item"><a class="page-link" href="#">다음</a></li>
+                   	<c:if test="${map.pageInfo.currentPage < map.pageInfo.maxPage }">	
+			        	<button 
+			       		class="btn btn-outline-primary" style="color:#52b1ff;"
+			       		onclick="location.href='boards?page=${map.pageInfo.startPage + 1}'">다음</button>
+		        	</c:if>
                 </ul>
             </div>
 
