@@ -44,6 +44,7 @@ public interface BoardService {
 	// 댓글작성
 	
 	// 게시글 검색기능
+	Map<String, Object> doSearch(Map<String, String> map);
 	
 	
 }

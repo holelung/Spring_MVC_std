@@ -106,8 +106,19 @@
 		        	</c:if>
         
 					<c:forEach begin="${ map.pageInfo.startPage }" end="${ map.pageInfo.endPage }" var="num">
+						
 	                    <li class="page-item">
-	                    	<a class="page-link" href="boards?page=${ num }">${ num }</a>
+	                    
+	                    <c:choose>
+	                    	<c:when test="${ empty map.condition }">
+	                    		<!-- 일반 게시글 목록 조회요청 -->
+		                    	<a class="page-link" href="boards?page=${ num }">${ num }</a>
+	                    	</c:when>
+	                    	<c:otherwise>
+	                    		<!-- 검색 게시글 목록 조회 요청 -->
+	                    		<a class="page-link" href="search?page=${num}&condition=${map.condition}&keyword=${map.keyword}">${num}</a>
+	                    	</c:otherwise>
+	                    </c:choose>
 	                    </li>
 					</c:forEach>                    
                    	<c:if test="${map.pageInfo.currentPage < map.pageInfo.maxPage }">	
@@ -120,7 +131,7 @@
 
             <br clear="both"><br>
 
-            <form id="searchForm" action="" method="get" align="center">
+            <form id="searchForm" action="search" method="get" align="center">
                 <div class="select">
                     <select class="custom-select" name="condition">
                         <option value="writer">작성자</option>
@@ -129,7 +140,7 @@
                     </select>
                 </div>
                 <div class="text">
-                    <input type="text" class="form-control" name="keyword">
+                    <input type="text" class="form-control" name="keyword" value="${ map.keyword }">
                 </div>
                 <button type="submit" class="searchBtn btn btn-secondary">검색</button>
             </form>
@@ -144,6 +155,19 @@
 	function goBoard(num, page){
 		location.href = `board?boardNo=\${num}&page=\${page}`;
     }
+	
+	window.onload = function(){
+		
+		const currentUrl = window.location.href;
+		const obj = new URL(currentUrl);
+		
+		const condition = obj.searchParams.get('condition');
+		
+		const selected = document.querySelector(`option[value='\${condition}']`);
+		selected.selected = true;
+	}
+	/* console.log('${map.condition}'); */
+	
 	</script>
 </body>
 </html>

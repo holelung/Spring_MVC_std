@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -201,9 +202,17 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	
-	
-	
+	@ResponseBody
+	@GetMapping("id-check")
+	public String idCheck(@RequestParam(name="memberId") String memberId) {
+		//조회 결과가 있다/없다
+		// NNNNY/NNNNN
+		
+		
+		
+		
+		return memberService.idCheck(memberId);
+	}
 	
 	
 	

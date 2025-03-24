@@ -36,10 +36,12 @@
             <br>
 
             <form action="signup" method="post">
-                <div class="form-group">
+                <div class="form-group" id="signupForm">
                     <label for="userId">* ID : </label>
                     <input type="text" class="form-control" id="userId" placeholder="Please Enter ID" name="memberId" required> <br>
-
+					<div id="checkResult" style="font-size:1em; display:none;"></div>
+					<br>
+					
                     <label for="userPwd">* Password : </label>
                     <input type="password" class="form-control" id="userPwd" placeholder="Please Enter Password" name="memberPw" required> <br>
 
@@ -66,6 +68,40 @@
 
     <!-- 푸터바 -->
     <jsp:include page="../include/footer.jsp" />
-
+	<script>
+		/* 사용자가 ID를 입력하는 INPUT요소에 무언가 값을 입력할 때마다
+			아이디가 중복인지 확인해서 출력해주기
+		*/
+	
+		const inputEl =  document.querySelector('#signupForm > #userId');
+		// console.log(inputEl);
+		inputEl.addEventListener('keyup', () => {
+			const inputValue = inputEl.value;
+			console.log(inputValue);
+			
+			if(inputValue.length >= 5) {
+				$.ajax({
+					url:`id-check?memberId=\${inputValue}`,
+					type:'GET',
+					success:function(res){
+						const result = res.substr(4);
+						if(result === 'Y'){
+							$('#checkResult').show()
+											 .css('color','crimson')
+											 .text('사용할 수 없는 아이디입니다.');
+						}else {
+							$('#checkResult').show()
+							 				 .css('color','lightgreen')
+							 				 .text('증말 멋진 아이디에요.');
+						}
+					}
+				});
+				
+			} else {
+				$('#checkResult').hide();
+			}
+			
+		});
+	</script>
 </body>
 </html>
