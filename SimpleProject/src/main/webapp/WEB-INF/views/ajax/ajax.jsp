@@ -167,17 +167,66 @@
 	<h3>VO 단일 객체 조회해서 출력하기 </h3>
 	
 	<div>
-		댓글 번호 : <p id="title"></p>
-		댓글 작성자 : <p id="writer"></p>
-		댓글 내용 : <p id="content"></p>
-		댓글 작성일 : <p id="date"></p>
+		게시글 제목 : <p id="title"></p>
+		게시글 작성자 : <p id="writer"></p>
+		게시글 내용 : <p id="content"></p>
+		게시글 작성일 : <p id="date"></p>
+		
+		<hr>
+		
+		<img id ="board-img"/>
+		
+		<hr>
+		
+		<div id="reply-area">
+			
+		</div>
 	</div>
 	
 	
-	댓글 번호 : <input type="text" id="replyNo">
-	<button onclick="selectReply()">댓글 보여주세요</button>
+	게시글 번호 : <input type="text" id="replyNo">
+	<button onclick="hi()">댓글 보여주세요</button>
 	
-	
+	<script>
+		function hi(){
+			const replyNo = document.getElementById('replyNo').value;
+			
+			$.ajax({
+				url: `study?replyNo=\${replyNo}`,
+				type: 'GET',
+				success: result => {
+					console.log(result);
+					// 응답받은 데이터 화면에 출력
+					$('#title').text(result.boardTitle);
+					$('#writer').text(result.boardWriter);
+					$('#content').text(result.boardContent);
+					$('#date').text(result.createDate);
+					
+					if(result.changeName){
+						$('#board-img').attr('src', result.changeName);
+					} else {
+						$('#board-img').attr('src', "");
+					}
+					
+					const reply = result.replyList;
+					console.log(reply);
+					
+					const elements = reply.map(e => {
+						return (
+							`<div>
+							<label> 댓글 작성자 : \${e.replyWriter}</label>
+							<label> 댓글 내용 : \${e.replyContent}</label>
+							<label> 작성일 : \${e.createDate}</label>
+							</div>`)
+					}).join('');
+					
+					document.querySelector('#reply-area').innerHTML = elements; 
+				}
+			});
+			
+		}
+		
+	</script>
 	
 	
 	

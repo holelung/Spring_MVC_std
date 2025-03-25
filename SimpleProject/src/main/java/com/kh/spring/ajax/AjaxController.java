@@ -1,9 +1,14 @@
 package com.kh.spring.ajax;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.kh.spring.board.model.dto.BoardDTO;
+import com.kh.spring.board.model.service.BoardService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,4 +39,17 @@ public class AjaxController {
 		return returnValue;
 	}
 
+	private final BoardService boardService;
+	
+	@Autowired
+	public AjaxController(BoardService boardService) {
+		this.boardService = boardService;
+	}
+	
+	@ResponseBody  
+	@GetMapping(value = "study", produces ="application/json; charset=UTF-8")
+	public ResponseEntity<BoardDTO> ajaxStudy(@RequestParam("replyNo") int boardNo) {
+		
+		return ResponseEntity.ok(boardService.selectBoard(boardNo)); 
+	}
 }

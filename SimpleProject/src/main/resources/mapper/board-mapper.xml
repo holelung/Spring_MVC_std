@@ -89,7 +89,7 @@
  		<result column="boardContent" property="boardContent" />
  		<result column="boardWriter" property="boardWriter" />
  		<result column="boardCreateDate" property="createDate" />
- 		<result column="chageName" property="changeName" />
+ 		<result column="changeName" property="changeName" />
  		<!-- 1:1 관계 association -->
  		<!-- 1:N 관계 collection -->
  		<collection property="replyList" ofType="com.kh.spring.reply.model.dto.ReplyDTO">

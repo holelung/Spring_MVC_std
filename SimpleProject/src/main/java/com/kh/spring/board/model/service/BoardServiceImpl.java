@@ -109,7 +109,7 @@ public class BoardServiceImpl implements BoardService {
 		if (!file.getOriginalFilename().isEmpty()) {
 			transferFile(session, file, board);
 		}
-
+		
 		boardMapper.insertBoard(board);
 
 	}
