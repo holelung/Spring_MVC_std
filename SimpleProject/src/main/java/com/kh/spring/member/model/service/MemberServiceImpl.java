@@ -140,7 +140,7 @@ public class MemberServiceImpl implements MemberService {
 		
 		sessionMember.setMemberName(member.getMemberName());
 		sessionMember.setEmail(member.getEmail());
-		
+
 	}
 
 	@Override

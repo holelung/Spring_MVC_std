@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.board.model.dto.BoardDTO;
+import com.kh.spring.reply.model.dto.ReplyDTO;
 
 public interface BoardService {
 
@@ -42,6 +43,7 @@ public interface BoardService {
 	//---------1절
 	
 	// 댓글작성
+	int insertReply(HttpSession session, ReplyDTO reply);
 	
 	// 게시글 검색기능
 	Map<String, Object> doSearch(Map<String, String> map);

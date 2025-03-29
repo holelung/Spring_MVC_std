@@ -163,7 +163,8 @@ public class MemberController {
 	}
 	
 	@GetMapping("my-page")
-	public String myPage() {
+	public String myPage(HttpSession session) {
+	
 		return "member/my_page";
 	}
 	
